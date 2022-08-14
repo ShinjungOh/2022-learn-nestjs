@@ -1,17 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
 
-export async function getServerSideProps() {
-    console.log('server');  // SSR 서버 사이드 렌더링
+export async function getStaticProps() {
+    console.log('server');  // ISR incremental static regeneration : 정적 사이트에 데이터를 가져와서 다시 그린다. (SSG + SSR)
 
     return {
-        props: {time: new Date().toISOString()}
+        props: {time: new Date().toISOString()},
+        revalidate: 1,
     }
 }
 
-export default function Home({time}) {
+export default function ISR({time}) {
     return (
         <div className={styles.container}>
             <Head>
@@ -23,9 +23,6 @@ export default function Home({time}) {
                 <h1 className={styles.title}>
                     {time}
                 </h1>
-                <h1><Link href="/csr"><a>CSR</a></Link></h1>
-                <h1><Link href="/ssg"><a>SSG</a></Link></h1>
-                <h1><Link href="/isr"><a>ISR</a></Link></h1>
             </main>
 
             <footer className={styles.footer}>

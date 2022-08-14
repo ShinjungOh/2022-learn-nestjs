@@ -1,17 +1,16 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
+import {useEffect, useState} from "react";
 
-export async function getServerSideProps() {
-    console.log('server');  // SSR 서버 사이드 렌더링
+export default function CSR() {
+    const [time, setTime] = useState();
 
-    return {
-        props: {time: new Date().toISOString()}
-    }
-}
+    useEffect(() => {
+        console.log('client');  // CSR 클라이언트 사이드 렌더링
+        setTime(new Date().toISOString());
+    }, []);
 
-export default function Home({time}) {
     return (
         <div className={styles.container}>
             <Head>
@@ -23,9 +22,6 @@ export default function Home({time}) {
                 <h1 className={styles.title}>
                     {time}
                 </h1>
-                <h1><Link href="/csr"><a>CSR</a></Link></h1>
-                <h1><Link href="/ssg"><a>SSG</a></Link></h1>
-                <h1><Link href="/isr"><a>ISR</a></Link></h1>
             </main>
 
             <footer className={styles.footer}>
