@@ -1,5 +1,6 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -10,16 +11,11 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">
-          Read this post <Link className="href" href="/posts/first-post"><a className="href">첫번째 글</a></Link>
-        </h1>
+        {/*<img src="/images/profile.jpg" alt="프로필"/>*/}
+        {/*<Image src="/images/profile.jpg" alt="프로필" width={140} height={140}/>*/}
 
         <h1 className="title">
-          Read this post <a href="/posts/first-post">첫번째 글(a tag)</a>
-        </h1>
-
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Read this post <Link href="/posts/first-post"><a className="href">첫번째 글</a></Link>
         </h1>
 
         <p className="description">
@@ -57,8 +53,9 @@ export default function Home() {
         </div>
       </main>
 
-
       <Link href="/posts/second-post"><a>두번째 글</a></Link>
+
+      <Image src="/images/profile.jpg" alt="프로필" width={140} height={140}/>
 
       <footer>
         <a
