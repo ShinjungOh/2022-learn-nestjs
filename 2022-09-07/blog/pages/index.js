@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,6 +10,14 @@ export default function Home() {
       </Head>
 
       <main>
+        <h1 className="title">
+          Read this post <Link className="href" href="/posts/first-post"><a className="href">첫번째 글</a></Link>
+        </h1>
+
+        <h1 className="title">
+          Read this post <a href="/posts/first-post">첫번째 글(a tag)</a>
+        </h1>
+
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -47,6 +56,9 @@ export default function Home() {
           </a>
         </div>
       </main>
+
+
+      <Link href="/posts/second-post"><a>두번째 글</a></Link>
 
       <footer>
         <a
@@ -97,15 +109,15 @@ export default function Home() {
           align-items: center;
         }
 
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
+        //a {
+        //  color: inherit;
+        //  text-decoration: none;
+        //}
+        //
+        //.title a {
+        //  color: #0070f3;
+        //  text-decoration: none;
+        //}
 
         .title a:hover,
         .title a:focus,
@@ -122,6 +134,10 @@ export default function Home() {
         .title,
         .description {
           text-align: center;
+        }
+        
+        .href {
+        color: pink;
         }
 
         .description {
