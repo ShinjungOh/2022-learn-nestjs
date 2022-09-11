@@ -1,19 +1,27 @@
 import Head from 'next/head';
 import Layout, {siteTitle} from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import {getSortedPostsData} from "../lib/posts";
+// import {getSortedPostsData} from "../lib/posts";
+import {useEffect, useState} from "react";
 
-export async function getServerSideProps() {  // SSG, SSR 함수만 변경하면 된다
-    const allPostsData = getSortedPostsData();
+// export async function getServerSideProps() {
+//     const allPostsData = getSortedPostsData();
+//
+//     return {
+//         props: {
+//             allPostsData,
+//         }
+//     }
+// }
 
-    return {
-        props: {
-            allPostsData,
-        }
-    }
-}
+export default function Home() {
+    const [allPostsData, setAllPostsData] = useState([]);
+    useEffect(() => {
+        fetch('/api/posts')
+            .then((res) => res.json())
+            .then((data) => setAllPostsData(data.allPostsData))
+    }, []);
 
-export default function Home({allPostsData}) {
     return (
         <Layout home>
             <Head>
