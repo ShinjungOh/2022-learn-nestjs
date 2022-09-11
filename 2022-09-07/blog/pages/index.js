@@ -14,13 +14,24 @@ import {useEffect, useState} from "react";
 //     }
 // }
 
-export default function Home() {
-    const [allPostsData, setAllPostsData] = useState([]);
-    useEffect(() => {
-        fetch('/api/posts')
-            .then((res) => res.json())
-            .then((data) => setAllPostsData(data.allPostsData))
-    }, []);
+export async function getStaticProps() {
+    const response = await fetch('http://localhost:3000/api/posts');  // 상대 경로 사용 불가
+    const json = await response.json();
+
+    return {
+        props: {
+            allPostsData: json.allPostsData,
+        }
+    }
+}
+
+export default function Home({allPostsData}) {
+    // const [allPostsData, setAllPostsData] = useState([]);
+    // useEffect(() => {
+    //     fetch('/api/posts')
+    //         .then((res) => res.json())
+    //         .then((data) => setAllPostsData(data.allPostsData))
+    // }, []);
 
     return (
         <Layout home>
