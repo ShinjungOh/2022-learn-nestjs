@@ -1,13 +1,22 @@
 import Layout from "../../components/Layout";
-import {getAllPostIds, getPostData} from '../../lib/posts';
+import {getPostData} from '../../lib/posts';
 import Date from "../../components/Date";
 import utilStyles from '../../styles/utils.module.css';
+import {useRouter} from "next/router";
 
 export async function getStaticPaths() {
-    const paths = getAllPostIds();
+    // const paths = getAllPostIds();
+    const paths = [
+        {
+            params: {
+                id: 'ssg-ssr'
+            }
+        }
+    ]
+
     return {
         paths,
-        fallback: false,
+        fallback: true,
     };
 }
 
@@ -21,6 +30,12 @@ export async function getStaticProps({params}) {
 }
 
 export default function Post({postData}) {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
+
     return (
         <Layout>
             <article>

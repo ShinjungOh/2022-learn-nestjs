@@ -16,8 +16,8 @@ import Date from '../components/Date';
 //     }
 // }
 
-export async function getStaticProps() {
-    const response = await fetch('http://localhost:3000/api/posts');  // 상대 경로 사용 불가
+export async function getServerSideProps() {
+    const response = await fetch('http://localhost:3000/api/posts');
     const json = await response.json();
 
     return {
