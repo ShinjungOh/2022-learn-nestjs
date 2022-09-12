@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
+import {remark} from 'remark';
 import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
@@ -81,4 +81,17 @@ export async function getPostData(id) {
         contentHtml,
         ...matterResult.data,
     };
+}
+
+export async function createPost({id, title, date, content}) {
+    const fullPath = path.join(postsDirectory, `${id}.md`);
+
+    const data = `---
+    title: '${title}'
+    date: '${date}
+    ---
+    
+    ${content}`
+
+    fs.writeFileSync(fullPath, data);
 }

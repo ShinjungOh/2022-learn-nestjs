@@ -1,39 +1,21 @@
 import Head from 'next/head';
-import Layout, {siteTitle} from '../components/layout';
+import Layout, {siteTitle} from '../components/Layout';
 import utilStyles from '../styles/utils.module.css';
-// import {getSortedPostsData} from "../lib/posts";
-import {useEffect, useState} from "react";
+import {getSortedPostsData} from "../lib/posts";
 import Link from 'next/link';
 import Date from '../components/Date';
 
-// export async function getServerSideProps() {
-//     const allPostsData = getSortedPostsData();
-//
-//     return {
-//         props: {
-//             allPostsData,
-//         }
-//     }
-// }
-
-export async function getServerSideProps() {
-    const response = await fetch('http://localhost:3000/api/posts');
-    const json = await response.json();
+export  async function getStaticProps() {
+    const allPostsData = getSortedPostsData();
 
     return {
         props: {
-            allPostsData: json.allPostsData,
+            allPostsData,
         }
     }
 }
 
 export default function Home({allPostsData}) {
-    // const [allPostsData, setAllPostsData] = useState([]);
-    // useEffect(() => {
-    //     fetch('/api/posts')
-    //         .then((res) => res.json())
-    //         .then((data) => setAllPostsData(data.allPostsData))
-    // }, []);
 
     return (
         <Layout home>
@@ -55,9 +37,9 @@ export default function Home({allPostsData}) {
                             <Link href={`/posts/${id}`}>
                                 <a>{title}</a>
                             </Link>
-                            <br />
+                            <br/>
                             <small className={utilStyles.lightText}>
-                                <Date dateString={date} />
+                                <Date dateString={date}/>
                             </small>
                         </li>
                     ))}
