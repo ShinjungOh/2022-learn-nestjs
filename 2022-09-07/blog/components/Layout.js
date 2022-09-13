@@ -53,43 +53,49 @@ export default function Layout({children, home}) {
                     <meta name="twitter:card" content="summary_large_image"/>
                 </Head>
                 <button className="w-12 px-2" onClick={handleClick}>
-                    {theme === 'dark' ? <img src="/light-mode.svg" alt="light"/> :
-                        <img src="/dark-mode.svg" alt="dark"/>}
+                    {
+                        theme === 'dark' ?
+                            <img src="/light-mode.svg" alt="light"/>
+                            :
+                            <img src="/dark-mode.svg" alt="dark"/>
+                    }
                 </button>
                 <header className={styles.header}>
-                    {home ? (
-                        <>
-                            <Image
-                                priority
-                                src="/images/profile.jpg"
-                                className={utilStyles.borderCircle}
-                                height={144}
-                                width={144}
-                                alt={name}
-                            />
-                            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-                        </>
-                    ) : (
-                        <>
-                            <Link href="/">
-                                <a>
-                                    <Image
-                                        priority
-                                        src="/images/profile.jpg"
-                                        className={utilStyles.borderCircle}
-                                        height={108}
-                                        width={108}
-                                        alt={name}
-                                    />
-                                </a>
-                            </Link>
-                            <h2 className={utilStyles.headingLg}>
+                    {
+                        home ? (
+                            <>
+                                <Image
+                                    priority
+                                    src="/images/profile.jpg"
+                                    className={utilStyles.borderCircle}
+                                    height={144}
+                                    width={144}
+                                    alt={name}
+                                />
+                                <h1 className={utilStyles.heading2Xl}>{name}</h1>
+                            </>
+                        ) : (
+                            <>
                                 <Link href="/">
-                                    <a className={utilStyles.colorInherit}>{name}</a>
+                                    <a>
+                                        <Image
+                                            priority
+                                            src="/images/profile.jpg"
+                                            className={utilStyles.borderCircle}
+                                            height={108}
+                                            width={108}
+                                            alt={name}
+                                        />
+                                    </a>
                                 </Link>
-                            </h2>
-                        </>
-                    )}
+                                <h2 className={utilStyles.headingLg}>
+                                    <Link href="/">
+                                        <a className={utilStyles.colorInherit}>{name}</a>
+                                    </Link>
+                                </h2>
+                            </>
+                        )
+                    }
                 </header>
                 <main>{children}</main>
                 {!home && (
