@@ -1,8 +1,7 @@
-
-    ---
-    title: 'Test Post'
-    date: '2022-09-13
-    ---
+---
+title: 'Test Post'
+date: '2022-09-13'
+---
     
-    ### Hello
-#### Hi
+### test
+#### 테스트 페이지
