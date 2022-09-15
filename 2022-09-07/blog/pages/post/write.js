@@ -1,8 +1,19 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Layout from "../../components/Layout";
 import Link from "next/link";
+import {useRouter} from "next/router";
+
+// export async function getServerSideProps() {
+//     return {};
+// }
 
 const Write = () => {
+    const router = useRouter();
+
+    useEffect(() => {
+        console.log(router.query);
+    }, [router.query]);
+
     const idRef = useRef(undefined);
     const titleRef = useRef(undefined);
     const contentRef = useRef(undefined);
@@ -59,5 +70,9 @@ const Write = () => {
         </Layout>
     )
 }
+
+// Write.getInitialProps = async () => {
+//     return {}
+// }
 
 export default Write;
