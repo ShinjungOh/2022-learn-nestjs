@@ -28,6 +28,9 @@ export default function Home({allPostsData}) {
                     (This is a sample website - you’ll be building a site like this on{' '}
                     <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
                 </p>
+                <button className="rounded bg-red-400 white mt-3 mb-5 px-2">
+                    <Link href="/post/write"><a>Write</a></Link>
+                </button>
             </section>
             <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
                 <h2 className={utilStyles.headingLg}>Blog</h2>
