@@ -1,16 +1,15 @@
-import Layout from "../../components/Layout";
 import {getAllPostIds, getPostData} from '../../lib/posts';
-import Date from "../../components/Date";
+import Date from "@components/Date";
 import utilStyles from '../../styles/utils.module.css';
 import {useRouter} from "next/router";
 import {MDXRemote} from "next-mdx-remote";
-import CodeBlock from "../../components/CodeBlock";
-// import Button from "../../components/Button";
-import dynamic from "next/dynamic";
-
-const Button = dynamic(() => import('../../components/Button'), {
-    loading: () => <div>Loading...</div>
-});
+import CodeBlock from "@components/CodeBlock";
+import Button from "@components/Button";
+// import dynamic from "next/dynamic";
+//
+// const Button = dynamic(() => import('../../components/Button'), {
+//     loading: () => <div>Loading...</div>
+// });
 
 export async function getStaticPaths() {
     const paths = getAllPostIds();
@@ -32,6 +31,7 @@ export async function getStaticProps({params, preview}) {
     console.log(`>>>> ${preview}`);
 
     const postData = await getPostData(params.id);
+
     return {
         props: {
             postData,
@@ -41,7 +41,7 @@ export async function getStaticProps({params, preview}) {
 
 const components = {Button, CodeBlock}
 
-export default function Post({postData}) {
+export default function Post({postData, pathname}) {
     const router = useRouter();
 
     if (router.isFallback) {
@@ -49,20 +49,19 @@ export default function Post({postData}) {
     }
 
     return (
-        <Layout>
-            <article>
-                <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-                <div className={utilStyles.lightText}>
-                    <Date dateString={postData.date}/>
-                </div>
-                <br/>
-                {
-                    postData.contentHtml && (<div dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>)
-                }
-                {
-                    postData.mdxSource && (<MDXRemote {...postData.mdxSource} components={components}/>)
-                }
-            </article>
-        </Layout>
+        <article>
+            <h2>pathname: {pathname}</h2>
+            <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+            <div className={utilStyles.lightText}>
+                <Date dateString={postData.date}/>
+            </div>
+            <br/>
+            {
+                postData.contentHtml && (<div dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>)
+            }
+            {
+                postData.mdxSource && (<MDXRemote {...postData.mdxSource} components={components}/>)
+            }
+        </article>
     )
 }

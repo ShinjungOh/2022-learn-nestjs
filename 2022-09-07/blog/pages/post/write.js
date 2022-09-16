@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Layout from "../../components/Layout";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
@@ -50,7 +49,7 @@ const Write = () => {
     }
 
     return (
-        <Layout>
+        <>
             <h1>내용을 입력하세요</h1>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="id" placeholder="id" required ref={idRef}/>
@@ -67,7 +66,7 @@ const Write = () => {
                     <a>Created Post</a>
                 </Link>
             }
-        </Layout>
+        </>
     )
 }
 
