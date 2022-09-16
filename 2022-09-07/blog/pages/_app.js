@@ -4,6 +4,10 @@ import {useRouter} from "next/router";
 import {useState} from "react";
 import {format, formatDistanceToNow} from "date-fns";
 
+export function reportWebVitals(metric) {
+    console.log(metric);
+}
+
 export default function App({Component, pageProps}) {
     const router = useRouter();
     const [visitedTime] = useState(new Date());
