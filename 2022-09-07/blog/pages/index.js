@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {siteTitle} from '@components/Layout';
+import {siteTitle} from '../pages/_document';
 import utilStyles from '../styles/utils.module.css';
 import {getSortedPostsData} from "../lib/posts";
 import Link from 'next/link';

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
+import Head from "next/head";
 
 // export async function getServerSideProps() {
 //     return {};
@@ -50,15 +51,20 @@ const Write = () => {
 
     return (
         <>
+            <Head>
+                <title>Write a post</title>
+            </Head>
             <h1>내용을 입력하세요</h1>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="id" placeholder="id" required ref={idRef}/>
                 <br/>
+                <br/>
                 <input type="text" name="title" placeholder="title" required ref={titleRef}/>
+                <br/>
                 <br/>
                 <textarea type="text" name="content" placeholder="content" required ref={contentRef}/>
                 <br/>
-                <input type="submit" value="Create"/>
+                <input className="rounded bg-purple-400 px-2" type="submit" value="Create"/>
             </form>
             {
                 showLink &&
