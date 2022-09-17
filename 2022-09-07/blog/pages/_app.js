@@ -2,7 +2,8 @@ import '../styles/global.css';
 import Layout from "@components/Layout";
 import {useRouter} from "next/router";
 import {useState} from "react";
-import {format, formatDistanceToNow} from "date-fns";
+import {formatDistanceToNow} from "date-fns";
+import ErrorBoundary from "@components/ErrorBoundary";
 
 export function reportWebVitals(metric) {
     console.log(metric);
@@ -18,7 +19,9 @@ export default function App({Component, pageProps}) {
                 {/*visited: {format(visitedTime, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")}*/}
                 visited: {formatDistanceToNow(new Date(visitedTime), {addSuffix: true, includeSeconds: true})}
             </div>
-            <Component {...pageProps} pathname={router.pathname}/>
+            <ErrorBoundary fallbackComponent={<div>오류 발생!</div>}>
+                <Component {...pageProps} pathname={router.pathname}/>
+            </ErrorBoundary>
         </Layout>
     );
 }
