@@ -7,14 +7,14 @@ class ErrorBoundary extends React.Component {
         this.state = {hasError: false, error: null, errorInfo: null}
     }
 
-    static getDerivedStateFromError(error) {
-        console.log(`getDerivedStateFromError : ${error}`);
-
-        return {hasError: true}
-    }
+    // static getDerivedStateFromError(error) {
+    //     console.log(`getDerivedStateFromError : ${error}`);
+    //
+    //     return {hasError: true}
+    // }
 
     componentDidCatch(error, errorInfo) {
-        this.setState({error, errorInfo});
+        this.setState({hasError: true, error, errorInfo});
         console.log(`componentDidCatch : ${(error, errorInfo)}`);
     }
 
@@ -29,8 +29,8 @@ class ErrorBoundary extends React.Component {
                     <h2>Error occured!</h2>
                     <details style={{whiteSpace: 'pre-wrap'}}>
                         {this.state.error && this.state.error.toString()}
-                        {/*<br/>*/}
-                        {/*{this.state.errorInfo.componentsStack}*/}
+                        <br/>
+                        {this.state.errorInfo && this.state.errorInfo.componentStack}
                     </details>
                 </div>
             )

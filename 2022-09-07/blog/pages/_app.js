@@ -19,7 +19,7 @@ export default function App({Component, pageProps}) {
                 {/*visited: {format(visitedTime, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")}*/}
                 visited: {formatDistanceToNow(new Date(visitedTime), {addSuffix: true, includeSeconds: true})}
             </div>
-            <ErrorBoundary fallbackComponent={<div>오류 발생!</div>}>
+            <ErrorBoundary>
                 <Component {...pageProps} pathname={router.pathname}/>
             </ErrorBoundary>
         </Layout>
