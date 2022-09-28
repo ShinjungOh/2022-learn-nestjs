@@ -11,6 +11,13 @@ const Write = () => {
     const router = useRouter();
 
     useEffect(() => {
+        if (router.isReady) {
+            console.log(JSON.stringify(router));
+        }
+        router.prefetch('/posts/ssg-ssr');  // build & start
+    }, [router]);
+
+    useEffect(() => {
         console.log(router.query);
     }, [router.query]);
 
@@ -72,6 +79,39 @@ const Write = () => {
                     <a>Created Post</a>
                 </Link>
             }
+            <br/>
+            <br/>
+            <button
+                // onClick={() => router.push('/posts/[id]','/posts/ssg-ssr', {scroll: false})}
+                onClick={() => router.push({pathname: '/posts/[id]', query: {id: 'ssg-ssr'}})}  // history o
+                className="rounded bg-purple-200 px-2" type="submit" value="Create"
+            >
+                router.push
+            </button>
+            <br/>
+            <br/>
+            <button
+                onClick={() => router.replace('/posts/ssg-ssr')}  // history x
+                className="rounded bg-purple-200 px-2" type="submit" value="Create"
+            >
+                router.replace
+            </button>
+            <br/>
+            <br/>
+            <button
+                onClick={() => router.back()}
+                className="rounded bg-purple-200 px-2" type="submit" value="Create"
+            >
+                router.back
+            </button>
+            <br/>
+            <br/>
+            <button
+                onClick={() => router.reload()}
+                className="rounded bg-purple-200 px-2" type="submit" value="Create"
+            >
+                router.reload
+            </button>
         </>
     )
 }
