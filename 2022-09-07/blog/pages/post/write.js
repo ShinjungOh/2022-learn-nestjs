@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {forwardRef, useEffect, useRef, useState} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Head from "next/head";
@@ -112,9 +112,28 @@ const Write = () => {
             >
                 router.reload
             </button>
+            <br/>
+            <br/>
+            <Link href="/posts/ssg-ssr" passHref>
+                <LinkButton />
+            </Link>
+            <br/>
+            <br/>
+            <Link href="/posts/ssg-ssr" replace scroll={false}>
+                <a>gogo</a>
+            </Link>
         </>
     )
 }
+
+const LinkButton = forwardRef(function Button({href}, ref) {
+        return (
+            <a href={href} ref={ref}>
+                {href}로 이동
+            </a>
+        )
+    }
+)
 
 // Write.getInitialProps = async () => {
 //     return {}
