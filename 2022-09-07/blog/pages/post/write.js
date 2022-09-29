@@ -1,11 +1,20 @@
+/* eslint-disable */
 import React, {forwardRef, useEffect, useRef, useState} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Head from "next/head";
+import getConfig from 'next/config';
 
 // export async function getServerSideProps() {
 //     return {};
 // }
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+// Will only be available on the server-side
+console.log(serverRuntimeConfig.mySecret);
+// Will be available on both server-side and client-side
+console.log(publicRuntimeConfig.staticFolder);
 
 const Write = () => {
     const router = useRouter();
@@ -61,7 +70,7 @@ const Write = () => {
             <Head>
                 <title>Write a post</title>
             </Head>
-            <h1>내용을 입력하세요</h1>
+            <h1>내용을 입력하세요 {process.env.customKey}</h1>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="id" placeholder="id" required ref={idRef}/>
                 <br/>
